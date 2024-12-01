@@ -1,193 +1,442 @@
-body {
-  font-family: 'Arial', sans-serif;
-  margin: 0;
-  padding: 0;
-  background: #e0e0e0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
+/*ver1*/
 
-#root {
-  width: 100%;
+/*body {*/
+/*  font-family: 'Arial', sans-serif;*/
+/*  margin: 0;*/
+/*  padding: 0;*/
+/*  background: #e0e0e0;*/
+/*  display: flex;*/
+/*  justify-content: center;*/
+/*  align-items: center;*/
+/*  height: 100vh;*/
+/*}*/
+
+/*#root {*/
+/*  width: 100%;*/
 
 
-}
+/*}*/
 
+/*.app {*/
+/*  display: flex;*/
+/*  flex-wrap: wrap;*/
+/*  background: #f0f0f0;*/
+/*  box-shadow: 8px 8px 15px #bebebe, -8px -8px 15px #ffffff;*/
+/*  border-radius: 20px;*/
+/*  overflow: hidden;  */
+/*  min-height: 500px;*/
+/*  width: 100%;*/
+
+/*}*/
+
+/*!* Левая панель *!*/
+/*.left-panel {*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  gap: 10px;*/
+/*  background: #e0e0e0;*/
+/*  padding: 10px;*/
+/*  width: 40%;*/
+/*  box-shadow: inset 8px 8px 15px #bebebe, inset -8px -8px 15px #ffffff;*/
+/*  flex: 1 1 300px;*/
+/*}*/
+
+/*.drink-button {*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*  justify-content: center;*/
+/*  flex-direction: column;*/
+/*  background: #f0f0f0;*/
+/*  border: none;*/
+/*  border-radius: 15px;*/
+/*  padding: 15px;*/
+/*  cursor: pointer;*/
+/*  box-shadow: 4px 4px 8px #bebebe, -4px -4px 8px #ffffff;*/
+/*  font-size: 16px;*/
+/*  text-align: center;*/
+/*}*/
+
+/*.drink-button:hover {*/
+/*  box-shadow: 2px 2px 5px #bebebe, -2px -2px 5px #ffffff;*/
+/*}*/
+
+/*.icon {*/
+/*  font-size: 24px;*/
+/*  margin-bottom: 5px;*/
+/*}*/
+
+/*!* Правая панель *!*/
+/*.right-panel {*/
+/*  flex: 1 1 350px;*/
+/*  padding: 10px;*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*}*/
+
+/*.title {*/
+/*  text-align: center;*/
+/*  font-size: 24px;*/
+/*  margin-bottom: 20px;*/
+/*}*/
+
+/*.order-list {*/
+/*  flex: 1;*/
+/*  overflow-y: auto;*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  gap: 10px;*/
+/*}*/
+
+/*.order-item {*/
+/*  display: flex;*/
+/*  justify-content: space-between;*/
+/*  align-items: center;*/
+/*  background: #f0f0f0;*/
+/*  padding: 10px;*/
+/*  border-radius: 10px;*/
+/*  box-shadow: 4px 4px 8px #bebebe, -4px -4px 8px #ffffff;*/
+/*}*/
+
+/*.summary {*/
+/*  text-align: center;*/
+/*  font-size: 18px;*/
+/*  margin-top: 10px;*/
+/*}*/
+
+/*.remove-button {*/
+/*  background: transparent;*/
+/*  border: none;*/
+/*  cursor: pointer;*/
+/*  font-size: 18px; !* Размер иконки *!*/
+/*  color: #ff6666;*/
+/*  margin-left: 10px;*/
+/*  padding: 5px;*/
+/*  border-radius: 50%;*/
+/*  box-shadow: 2px 2px 4px #bebebe, -2px -2px 4px #ffffff;*/
+/*  transition: all 0.2s ease;*/
+/*}*/
+
+/*.remove-button:hover {*/
+/*  background: #ffcccc;*/
+/*  color: #ff3333;*/
+/*  box-shadow: 1px 1px 3px #bebebe, -1px -1px 3px #ffffff;*/
+/*}*/
+
+/*!* Контейнер для кнопки напитка и Set price *!*/
+/*.drink-container {*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*  margin-bottom: 10px;*/
+/*}*/
+
+/*!* Кнопка Set price *!*/
+/*.set-price-button {*/
+/*  background: #4caf50;*/
+/*  color: white;*/
+/*  border: none;*/
+/*  border-radius: 8px;*/
+/*  padding: 8px 10px;*/
+/*  font-size: 14px;*/
+/*  cursor: pointer;*/
+/*  margin-left: 10px;*/
+/*  box-shadow: 2px 2px 4px #bebebe, -2px -2px 4px #ffffff;*/
+/*  transition: all 0.2s ease;*/
+/*}*/
+
+/*.set-price-button:hover {*/
+/*  background: #45a049;*/
+/*  box-shadow: 1px 1px 3px #bebebe, -1px -1px 3px #ffffff;*/
+/*}*/
+
+/*!* Кнопка напитка *!*/
+/*.drink-button {*/
+/*  position: relative;*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*  justify-content: space-between;*/
+/*  background: #f0f0f0;*/
+/*  border: none;*/
+/*  border-radius: 12px;*/
+/*  padding: 10px 20px;*/
+/*  margin-bottom: 15px;*/
+/*  cursor: pointer;*/
+/*  font-size: 16px;*/
+/*  box-shadow: 2px 2px 6px #bebebe, -2px -2px 6px #ffffff;*/
+/*  transition: all 0.2s ease;*/
+/*}*/
+
+/*.drink-button:hover {*/
+/*  background: #e0e0e0;*/
+/*}*/
+
+/*.drink-content {*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*  gap: 10px;*/
+/*}*/
+
+/*.set-price-button {*/
+/*  position: absolute;*/
+/*  left: 10px;*/
+/*  top: 50%;*/
+/*  transform: translateY(-50%);*/
+/*  background: #4caf50;*/
+/*  color: #ffffff;*/
+/*  border: none;*/
+/*  border-radius: 8px;*/
+/*  padding: 6px 8px;*/
+/*  font-size: 14px;*/
+/*  cursor: pointer;*/
+/*  box-shadow: 1px 1px 3px #bebebe, -1px -1px 3px #ffffff;*/
+/*  width: 50px;*/
+/*}*/
+
+/*.set-price-button:hover {*/
+/*  background: #45a049;*/
+/*}*/
+
+
+
+/*ver2*/
+/*.app {*/
+/*  display: flex;*/
+/*  flex-direction: row;*/
+/*  height: 100vh;*/
+/*}*/
+
+/*.left-panel {*/
+/*  flex: 1;*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  padding: 10px;*/
+/*  background-color: #f5f5f5;*/
+/*  overflow-y: auto;*/
+/*}*/
+
+/*.right-panel {*/
+/*  flex: 1;*/
+/*  padding: 10px;*/
+/*  background-color: #ffffff;*/
+/*  border-left: 2px solid #ddd;*/
+/*  overflow-y: auto;*/
+/*}*/
+
+/*.drink-button {*/
+/*  position: relative;*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*  justify-content: space-between;*/
+/*  margin-bottom: 10px;*/
+/*  padding: 10px;*/
+/*  background-color: #e7e7e7;*/
+/*  border: 1px solid #ccc;*/
+/*  border-radius: 5px;*/
+/*  cursor: pointer;*/
+/*}*/
+
+/*.drink-button:hover {*/
+/*  background-color: #d7d7d7;*/
+/*}*/
+
+/*.drink-content {*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  align-items: flex-start;*/
+/*}*/
+
+/*.button-actions {*/
+/*  display: flex;*/
+/*  gap: 5px;*/
+/*}*/
+
+/*.action-button {*/
+/*  padding: 5px 10px;*/
+/*  background-color: #007bff;*/
+/*  border: none;*/
+/*  color: white;*/
+/*  border-radius: 3px;*/
+/*  cursor: pointer;*/
+/*}*/
+
+/*.action-button.for-floors {*/
+/*  background-color: #28a745;*/
+/*}*/
+
+/*.action-button.for-all {*/
+/*  background-color: #ffc107;*/
+/*}*/
+
+/*.action-button:hover {*/
+/*  opacity: 0.9;*/
+/*}*/
+
+/*.current-order-summary {*/
+/*  margin-top: 20px;*/
+/*  padding: 10px;*/
+/*  background-color: #fff8e1;*/
+/*  border: 1px solid #ffecb3;*/
+/*  border-radius: 5px;*/
+/*}*/
+
+/*.current-order-item {*/
+/*  display: flex;*/
+/*  justify-content: space-between;*/
+/*  margin-bottom: 10px;*/
+/*}*/
+
+/*.current-order-total {*/
+/*  font-weight: bold;*/
+/*  text-align: right;*/
+/*  margin-top: 10px;*/
+/*}*/
+
+/*.add-order-button {*/
+/*  width: 100%;*/
+/*  padding: 10px;*/
+/*  background-color: #28a745;*/
+/*  border: none;*/
+/*  color: white;*/
+/*  font-weight: bold;*/
+/*  border-radius: 5px;*/
+/*  cursor: pointer;*/
+/*  margin-top: 10px;*/
+/*}*/
+
+/*.add-order-button:hover {*/
+/*  background-color: #218838;*/
+/*}*/
+
+/*.start-order-button {*/
+/*  padding: 15px;*/
+/*  background-color: #007bff;*/
+/*  border: none;*/
+/*  color: white;*/
+/*  font-size: 16px;*/
+/*  font-weight: bold;*/
+/*  border-radius: 5px;*/
+/*  cursor: pointer;*/
+/*}*/
+
+/*.start-order-button:hover {*/
+/*  background-color: #0056b3;*/
+/*}*/
+
+/*.order-item {*/
+/*  margin-bottom: 10px;*/
+/*  padding: 10px;*/
+/*  background-color: #f8f9fa;*/
+/*  border: 1px solid #dee2e6;*/
+/*  border-radius: 5px;*/
+/*}*/
+
+
+/* Общие стили */
 .app {
   display: flex;
-  flex-wrap: wrap;
-  background: #f0f0f0;
-  box-shadow: 8px 8px 15px #bebebe, -8px -8px 15px #ffffff;
-  border-radius: 20px;
-  overflow: hidden;  
-  min-height: 500px;
-  width: 100%;
-
-}
-
-/* Левая панель */
-.left-panel {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  background: #e0e0e0;
+  flex-direction: row;
+  height: 100vh;
   padding: 10px;
-  width: 40%;
-  box-shadow: inset 8px 8px 15px #bebebe, inset -8px -8px 15px #ffffff;
-  flex: 1 1 300px;
+  box-sizing: border-box;
 }
 
-.drink-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background: #f0f0f0;
-  border: none;
-  border-radius: 15px;
-  padding: 15px;
-  cursor: pointer;
-  box-shadow: 4px 4px 8px #bebebe, -4px -4px 8px #ffffff;
-  font-size: 16px;
-  text-align: center;
-}
-
-.drink-button:hover {
-  box-shadow: 2px 2px 5px #bebebe, -2px -2px 5px #ffffff;
-}
-
-.icon {
-  font-size: 24px;
-  margin-bottom: 5px;
-}
-
-/* Правая панель */
+.left-panel,
 .right-panel {
-  flex: 1 1 350px;
+  flex: 1;
+  margin: 10px;
   padding: 10px;
-  display: flex;
-  flex-direction: column;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  background-color: #fff;
 }
 
-.title {
-  text-align: center;
-  font-size: 24px;
-  margin-bottom: 20px;
+.left-panel {
+  max-width: 300px;
+}
+
+.right-panel {
+  flex: 2;
+}
+
+.start-order-button,
+.drink-button,
+.add-order-button {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.action-button {
+  margin: 5px;
+  font-size: 14px;
+  padding: 5px 10px;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .order-list {
-  flex: 1;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  margin-top: 20px;
 }
 
 .order-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #f0f0f0;
-  padding: 10px;
-  border-radius: 10px;
-  box-shadow: 4px 4px 8px #bebebe, -4px -4px 8px #ffffff;
-}
-
-.summary {
-  text-align: center;
-  font-size: 18px;
-  margin-top: 10px;
-}
-
-.remove-button {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  font-size: 18px; /* Размер иконки */
-  color: #ff6666;
-  margin-left: 10px;
-  padding: 5px;
-  border-radius: 50%;
-  box-shadow: 2px 2px 4px #bebebe, -2px -2px 4px #ffffff;
-  transition: all 0.2s ease;
-}
-
-.remove-button:hover {
-  background: #ffcccc;
-  color: #ff3333;
-  box-shadow: 1px 1px 3px #bebebe, -1px -1px 3px #ffffff;
-}
-
-/* Контейнер для кнопки напитка и Set price */
-.drink-container {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-/* Кнопка Set price */
-.set-price-button {
-  background: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 8px 10px;
-  font-size: 14px;
-  cursor: pointer;
-  margin-left: 10px;
-  box-shadow: 2px 2px 4px #bebebe, -2px -2px 4px #ffffff;
-  transition: all 0.2s ease;
-}
-
-.set-price-button:hover {
-  background: #45a049;
-  box-shadow: 1px 1px 3px #bebebe, -1px -1px 3px #ffffff;
-}
-
-/* Кнопка напитка */
-.drink-button {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #f0f0f0;
-  border: none;
-  border-radius: 12px;
-  padding: 10px 20px;
   margin-bottom: 15px;
-  cursor: pointer;
-  font-size: 16px;
-  box-shadow: 2px 2px 6px #bebebe, -2px -2px 6px #ffffff;
-  transition: all 0.2s ease;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
 }
 
-.drink-button:hover {
-  background: #e0e0e0;
+/* Адаптация для мобильных устройств */
+@media (max-width: 768px) {
+  .app {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .left-panel,
+  .right-panel {
+    max-width: 100%;
+    margin: 5px 0;
+  }
+
+  .start-order-button,
+  .drink-button,
+  .add-order-button {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .action-button {
+    font-size: 12px;
+    padding: 5px;
+  }
+
+  .drink-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .current-order-item {
+    font-size: 14px;
+  }
+
+  .order-list {
+    font-size: 14px;
+  }
+
+  .summary {
+    font-size: 16px;
+    text-align: center;
+  }
 }
 
-.drink-content {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.set-price-button {
-  position: absolute;
-  left: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: #4caf50;
-  color: #ffffff;
-  border: none;
-  border-radius: 8px;
-  padding: 6px 8px;
-  font-size: 14px;
-  cursor: pointer;
-  box-shadow: 1px 1px 3px #bebebe, -1px -1px 3px #ffffff;
-}
-
-.set-price-button:hover {
-  background: #45a049;
-}
