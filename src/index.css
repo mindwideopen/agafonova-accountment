@@ -373,14 +373,32 @@
 }
 
 .action-button {
-  margin: 5px;
+  margin: 15px;
   font-size: 14px;
   padding: 5px 10px;
   background-color: #6c757d;
   color: white;
   border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 60px;
+  height: 60px;
+
+}
+
+.delete-order-button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 14px;
+}
+
+.delete-order-button:hover {
+  background-color: #c82333;
 }
 
 .order-list {
@@ -393,6 +411,11 @@
   border: 1px solid #ddd;
   border-radius: 5px;
   background-color: #f9f9f9;
+}
+
+.summary {
+  font-size: 18px;
+  font-weight: bold;
 }
 
 /* Адаптация для мобильных устройств */
@@ -417,26 +440,8 @@
 
   .action-button {
     font-size: 12px;
-    padding: 5px;
-  }
+    padding: 15px;
 
-  .drink-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .current-order-item {
-    font-size: 14px;
-  }
-
-  .order-list {
-    font-size: 14px;
-  }
-
-  .summary {
-    font-size: 16px;
-    text-align: center;
   }
 }
 

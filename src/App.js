@@ -336,62 +336,32 @@ const initialCoffeeDrinks = [
         id: 1,
         name: "Espresso",
         icon: "☕",
-        price: { floors: 1, all: 2 },
+        price: { floors: 10, all: 20 },
     },
     {
         id: 2,
         name: "Latte",
         icon: "🥛",
-        price: { floors: 3, all: 4 },
+        price: { floors: 12, all: 24 },
     },
     {
         id: 3,
         name: "Cappuccino",
         icon: "🍶",
-        price: { floors: 5, all: 6 },
+        price: { floors: 15, all: 30 },
     },
     {
         id: 4,
         name: "Americano",
         icon: "🫖",
-        price: { floors: 7, all: 8 },
+        price: { floors: 8, all: 16 },
     },
     {
         id: 5,
         name: "Mocha",
         icon: "🍫",
-        price: { floors: 19, all: 10 },
+        price: { floors: 18, all: 36 },
     },
-    {
-        id: 6,
-        name: "Espresso",
-        icon: "☕",
-        price: { floors: 1, all: 2 },
-    },
-    {
-        id: 7,
-        name: "Latte",
-        icon: "🥛",
-        price: { floors: 3, all: 4 },
-    },
-    {
-        id: 8,
-        name: "Cappuccino",
-        icon: "🍶",
-        price: { floors: 5, all: 6 },
-    },
-    {
-        id: 9,
-        name: "Americano",
-        icon: "🫖",
-        price: { floors: 7, all: 8 },
-    },
-    {
-        id: 10,
-        name: "Mocha",
-        icon: "🍫",
-        price: { floors: 19, all: 10 },
-    }
 ];
 
 function App() {
@@ -452,11 +422,18 @@ function App() {
         setIsSelecting(false);
     };
 
+    const removeOrder = (indexToRemove) => {
+        setOrderList((prevList) => prevList.filter((_, index) => index !== indexToRemove));
+    };
+
     const calculateOrderTotal = (order) =>
         order.reduce((total, item) => total + item.count * item.price, 0);
 
     const calculateTotalCost = () =>
         orderList.reduce((total, order) => total + calculateOrderTotal(order), 0);
+    const clearOrderHistory = () => {
+        setOrderList([]);
+    };
 
     return (
         <div className="app">
@@ -517,6 +494,12 @@ function App() {
                                 ))}
                             </select>
                             <span>Стоимость: ${calculateOrderTotal(order)}</span>
+                            <button
+                                className="delete-order-button"
+                                onClick={() => removeOrder(index)}
+                            >
+                                Удалить
+                            </button>
                         </div>
                     ))}
                 </div>
@@ -524,6 +507,9 @@ function App() {
                     Общая стоимость всех заказов:{" "}
                     <strong>${calculateTotalCost()}</strong>
                 </div>
+                <button className="clear-history-button" onClick={clearOrderHistory}>
+                    Очистить историю заказов
+                </button>
 
                 {isSelecting && currentOrder.length > 0 && (
                     <div className="current-order-summary">
@@ -532,8 +518,8 @@ function App() {
                             <div key={index} className="current-order-item">
                                 <span>{item.icon}</span>
                                 <span>
-                            {item.name} {item.label}
-                        </span>
+                                    {item.name} {item.label}
+                                </span>
                                 <span>x{item.count}</span>
                                 <span>${item.count * item.price}</span>
                             </div>
