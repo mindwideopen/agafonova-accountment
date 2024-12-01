@@ -1,0 +1,10 @@
+/*!* Левая панель *!*/
+
+/*!* Правая панель *!*/
+
+/*!* Контейнер для кнопки напитка и Set price *!*/
+
+/*!* Кнопка Set price *!*/
+
+/*!* Кнопка напитка *!*/.app{box-sizing:border-box;display:flex;flex-direction:row;height:100vh;padding:10px}.left-panel,.right-panel{background-color:#fff;border-radius:8px;box-shadow:0 2px 5px #0003;flex:1 1;margin:10px;padding:10px}.left-panel{max-width:300px}.right-panel{flex:2 1}.add-order-button,.drink-button,.start-order-button{background-color:#007bff;border:none;border-radius:5px;color:#fff;cursor:pointer;display:block;font-size:16px;margin:10px 0;padding:10px;width:100%}.action-button{background-color:#6c757d;margin:5px}.action-button,.delete-order-button{border:none;border-radius:5px;color:#fff;cursor:pointer;font-size:14px;padding:5px 10px}.delete-order-button{background-color:#dc3545;margin-left:10px}.delete-order-button:hover{background-color:#c82333}.order-list{margin-top:20px}.order-item{background-color:#f9f9f9;border:1px solid #ddd;border-radius:5px;margin-bottom:15px;padding:10px}.summary{font-size:18px;font-weight:700}@media (max-width:768px){.app{flex-direction:column;height:auto}.left-panel,.right-panel{margin:5px 0;max-width:100%}.add-order-button,.drink-button,.start-order-button{font-size:14px;padding:8px}.action-button{font-size:12px;padding:5px}}.App{text-align:center}.App-logo{height:40vmin;pointer-events:none}@media (prefers-reduced-motion:no-preference){.App-logo{animation:App-logo-spin 20s linear infinite}}.App-header{align-items:center;background-color:#282c34;color:#fff;display:flex;flex-direction:column;font-size:calc(10px + 2vmin);justify-content:center;min-height:100vh}.App-link{color:#61dafb}@keyframes App-logo-spin{0%{transform:rotate(0deg)}to{transform:rotate(1turn)}}
+/*# sourceMappingURL=main.7bf4c5d2.css.map*/
