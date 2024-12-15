@@ -1,15 +1,13 @@
 {
   "files": {
-    "main.css": "/agafonova-accountment/static/css/main.7bf4c5d2.css",
-    "main.js": "/agafonova-accountment/static/js/main.cdfdf096.js",
-    "static/js/453.a1a1b806.chunk.js": "/agafonova-accountment/static/js/453.a1a1b806.chunk.js",
+    "main.css": "/agafonova-accountment/static/css/main.4492f780.css",
+    "main.js": "/agafonova-accountment/static/js/main.6637d896.js",
     "index.html": "/agafonova-accountment/index.html",
-    "main.7bf4c5d2.css.map": "/agafonova-accountment/static/css/main.7bf4c5d2.css.map",
-    "main.cdfdf096.js.map": "/agafonova-accountment/static/js/main.cdfdf096.js.map",
-    "453.a1a1b806.chunk.js.map": "/agafonova-accountment/static/js/453.a1a1b806.chunk.js.map"
+    "main.4492f780.css.map": "/agafonova-accountment/static/css/main.4492f780.css.map",
+    "main.6637d896.js.map": "/agafonova-accountment/static/js/main.6637d896.js.map"
   },
   "entrypoints": [
-    "static/css/main.7bf4c5d2.css",
-    "static/js/main.cdfdf096.js"
+    "static/css/main.4492f780.css",
+    "static/js/main.6637d896.js"
   ]
 }
