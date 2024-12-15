@@ -1,75 +1,96 @@
 .app {
   display: flex;
-  font-family: Arial, sans-serif;
-}
-
-.left-panel {
-  flex: 1;
+  flex-direction: column;
+  align-items: center;
   padding: 20px;
-  background-color: #f8f9fa;
 }
 
+.left-panel,
 .right-panel {
-  flex: 2;
-  padding: 20px;
-  background-color: #fff;
+  margin: 10px;
 }
 
 .start-order-button,
-.clear-history-button,
 .add-order-button,
-.delete-order-button {
+.clear-history-button {
   padding: 10px 20px;
-  margin: 10px 0;
-  background-color: #007bff;
+  background-color: #28a745;
   color: white;
   border: none;
-  cursor: pointer;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .start-order-button:hover,
-.clear-history-button:hover,
 .add-order-button:hover,
-.delete-order-button:hover {
-  background-color: #0056b3;
+.clear-history-button:hover {
+  background-color: #218838;
 }
 
-.drink-button {
+.order-list {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ddd;
-  background-color: #f1f1f1;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.drink-content {
-  display: flex;
-  align-items: center;
-}
-
-.icon {
-  font-size: 24px;
-  margin-right: 10px;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .order-item {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  width: 100%;
   margin: 10px 0;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.summary {
-  margin-top: 20px;
-  font-size: 18px;
+.delete-order-button {
+  padding: 5px 10px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-order-button:hover {
+  background-color: #c82333;
 }
 
 .current-order-summary {
   margin-top: 20px;
-  border-top: 1px solid #ddd;
-  padding-top: 20px;
+}
+
+.current-order-item {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 5px 0;
+}
+
+.volume-options,
+.type-options,
+.additions-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.type-button,
+.volume-button,
+.addition-button {
+  padding: 10px;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.type-button.selected,
+.volume-button.selected,
+.addition-button.selected {
+  background-color: #007bff;
+  color: white;
+  border: none;
 }

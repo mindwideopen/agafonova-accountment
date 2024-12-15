@@ -1,105 +1,93 @@
 import React, { useState } from "react";
 import "./Modal.css";
 
-export const Modal = ({ drink, addDrinkToCurrentOrder, closeModal, addOns }) => {
-    const [size, setSize] = useState(null);
-    const [type, setType] = useState(null);
-    const [selectedAddOns, setSelectedAddOns] = useState([]);
+export const Modal = ({ isOpen, onClose, onConfirm, drink, additions }) => {
+    const [selectedType, setSelectedType] = useState(null);
+    const [selectedVolume, setSelectedVolume] = useState(null);
+    const [selectedAdditions, setSelectedAdditions] = useState([]);
 
-    const toggleAddOn = (addOn) => {
-        setSelectedAddOns((prev) =>
-            prev.includes(addOn)
-                ? prev.filter((item) => item !== addOn)
-                : [...prev, addOn]
+    const toggleAddition = (addition) => {
+        setSelectedAdditions((prevAdditions) =>
+            prevAdditions.some((add) => add.id === addition.id)
+                ? prevAdditions.filter((add) => add.id !== addition.id)
+                : [...prevAdditions, addition]
         );
     };
 
-    const calculateTotalPrice = () => {
-        if (!size || !type) return 0;
+    const handleConfirm = () => {
+        if (!selectedType || !selectedVolume) {
+            alert("Пожалуйста, выберите для кого и объем напитка!");
+            return;
+        }
 
-        const basePrice = drink.price[type][size];
-        const addOnsPrice = selectedAddOns.reduce((total, addOn) => total + addOn.price, 0);
-
-        return basePrice + addOnsPrice;
+        onConfirm(selectedType, selectedVolume, selectedAdditions);
+        setSelectedType(null);
+        setSelectedVolume(null);
+        setSelectedAdditions([]);
+        onClose();
     };
 
-    const handleAddDrink = () => {
-        if (!size || !type) return;
-
-        const totalPrice = calculateTotalPrice();
-        const label = `${type === "floors" ? "Этажи" : "Все"}, ${size}`;
-
-        addDrinkToCurrentOrder({
-            ...drink,
-            count: 1,
-            size,
-            type,
-            totalPrice,
-            addOnsPrice: totalPrice - drink.price[type][size],
-            label,
-        });
-
-        closeModal();
-    };
+    if (!isOpen) return null;
 
     return (
-        <div className="modal-overlay" onClick={closeModal}>
+        <div className="modal-backdrop" onClick={onClose}>
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                <h3>Выберите параметры для {drink.name}</h3>
-                <div className="options">
-                    <h4>Размер:</h4>
+                <h3>Настройка для {drink.name}</h3>
+                <h4>Выберите для кого:</h4>
+                <div className="type-options">
                     <button
-                        className={`option-button ${size === "M" ? "selected" : ""}`}
-                        onClick={() => setSize("M")}
-                    >
-                        M
-                    </button>
-                    <button
-                        className={`option-button ${size === "L" ? "selected" : ""}`}
-                        onClick={() => setSize("L")}
-                    >
-                        L
-                    </button>
-                </div>
-
-                <div className="options">
-                    <h4>Тип:</h4>
-                    <button
-                        className={`option-button ${type === "floors" ? "selected" : ""}`}
-                        onClick={() => setType("floors")}
+                        className={`type-button ${
+                            selectedType === "floors" ? "selected" : ""
+                        }`}
+                        onClick={() => setSelectedType("floors")}
                     >
                         Для Этажей
                     </button>
                     <button
-                        className={`option-button ${type === "all" ? "selected" : ""}`}
-                        onClick={() => setType("all")}
+                        className={`type-button ${
+                            selectedType === "all" ? "selected" : ""
+                        }`}
+                        onClick={() => setSelectedType("all")}
                     >
-                        Для всех
+                        Для Всех
                     </button>
                 </div>
-
-                <div className="options">
-                    <h4>Добавки:</h4>
-                    {addOns.map((addOn) => (
+                <h4>Выберите объем:</h4>
+                <div className="volume-options">
+                    <button
+                        className={`volume-button ${selectedVolume === "M" ? "selected" : ""}`}
+                        onClick={() => setSelectedVolume("M")}
+                    >
+                        M
+                    </button>
+                    <button
+                        className={`volume-button ${selectedVolume === "L" ? "selected" : ""}`}
+                        onClick={() => setSelectedVolume("L")}
+                    >
+                        L
+                    </button>
+                </div>
+                <h4>Добавки:</h4>
+                <div className="additions-options">
+                    {additions.map((addition) => (
                         <button
-                            key={addOn.id}
-                            className={`option-button ${selectedAddOns.includes(addOn) ? "selected" : ""}`}
-                            onClick={() => toggleAddOn(addOn)}
+                            key={addition.id}
+                            className={`addition-button ${
+                                selectedAdditions.some((add) => add.id === addition.id)
+                                    ? "selected"
+                                    : ""
+                            }`}
+                            onClick={() => toggleAddition(addition)}
                         >
-                            {addOn.name} (+${addOn.price})
+                            {addition.name} (+${addition.price})
                         </button>
                     ))}
                 </div>
-
-                <div className="summary">
-                    <p>Итоговая стоимость: ${calculateTotalPrice()}</p>
-                </div>
-
-                <div className="actions">
-                    <button className="confirm-button" onClick={handleAddDrink}>
-                        Добавить
+                <div className="modal-actions">
+                    <button className="confirm-button" onClick={handleConfirm}>
+                        Подтвердить
                     </button>
-                    <button className="cancel-button" onClick={closeModal}>
+                    <button className="cancel-button" onClick={onClose}>
                         Отмена
                     </button>
                 </div>
@@ -108,4 +96,4 @@ export const Modal = ({ drink, addDrinkToCurrentOrder, closeModal, addOns }) => 
     );
 };
 
-export default Modal;
+

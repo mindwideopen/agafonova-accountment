@@ -1,17 +1,36 @@
-
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import {Modal} from "./Modal";
 
 const initialCoffeeDrinks = [
-    { id: 1, name: "Espresso", icon: "☕", price: { floors: { M: 10, L: 15 }, all: { M: 20, L: 25 } } },
-    { id: 2, name: "Latte", icon: "🥛", price: { floors: { M: 10, L: 15 }, all: { M: 20, L: 25 } } },
-    { id: 3, name: "Cappuccino", icon: "🍶", price: { floors: { M: 10, L: 15 }, all: { M: 20, L: 25 } } },
-    { id: 4, name: "Americano", icon: "🫖", price: { floors: { M: 10, L: 15 }, all: { M: 20, L: 25 } } },
-    { id: 5, name: "Mocha", icon: "🍫", price: { floors: { M: 10, L: 15 }, all: { M: 20, L: 25 } } },
+    {
+        id: 1,
+        name: "Espresso",
+        icon: "☕",
+    },
+    {
+        id: 2,
+        name: "Latte",
+        icon: "🥛",
+    },
+    {
+        id: 3,
+        name: "Cappuccino",
+        icon: "🍶",
+    },
+    {
+        id: 4,
+        name: "Americano",
+        icon: "🫖",
+    },
+    {
+        id: 5,
+        name: "Mocha",
+        icon: "🍫",
+    },
 ];
 
-const initialAddOns = [
+const initialAdditions = [
     { id: 1, name: "Корица", price: 1 },
     { id: 2, name: "Сироп", price: 1 },
     { id: 3, name: "Спешелти кофе", price: 1 },
@@ -20,9 +39,11 @@ const initialAddOns = [
 function App() {
     const [orderList, setOrderList] = useState([]);
     const [currentOrder, setCurrentOrder] = useState([]);
+    const [coffeeDrinks, setCoffeeDrinks] = useState(initialCoffeeDrinks);
+    const [additions, setAdditions] = useState(initialAdditions);
     const [isSelecting, setIsSelecting] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedDrink, setSelectedDrink] = useState(null);
-    const [modalVisible, setModalVisible] = useState(false);
 
     useEffect(() => {
         try {
@@ -48,21 +69,63 @@ function App() {
         setCurrentOrder([]);
     };
 
-    const showModal = (drink) => {
+    const openModal = (drink) => {
         setSelectedDrink(drink);
-        setModalVisible(true);
+        setIsModalOpen(true);
     };
 
-    const closeModal = () => {
-        setSelectedDrink(null);
-        setModalVisible(false);
+    const handleConfirmOrder = (type, volume, selectedAdditions) => {
+        addDrinkToCurrentOrder(selectedDrink, type, volume, selectedAdditions);
+        setIsModalOpen(false);
     };
 
-    const addDrinkToCurrentOrder = (drinkDetails) => {
-        setCurrentOrder((prevOrder) => [...prevOrder, drinkDetails]);
+    const addDrinkToCurrentOrder = (drink, type, volume, additions) => {
+        const price =
+            volume === "M"
+                ? type === "floors"
+                    ? 10
+                    : 20
+                : type === "floors"
+                    ? 15
+                    : 25;
+
+        const additionsPrice = additions.reduce((total, add) => total + add.price, 0);
+
+        setCurrentOrder((prevOrder) => {
+            const existingDrink = prevOrder.find(
+                (item) => item.id === drink.id && item.label === `${type} (${volume})`
+            );
+            if (existingDrink) {
+                return prevOrder.map((item) =>
+                    item.id === drink.id && item.label === `${type} (${volume})`
+                        ? {
+                            ...item,
+                            count: item.count + 1,
+                            price: price + additionsPrice,
+                            additions,
+                        }
+                        : item
+                );
+            } else {
+                return [
+                    ...prevOrder,
+                    {
+                        ...drink,
+                        count: 1,
+                        price: price + additionsPrice,
+                        label: `${type} (${volume})`,
+                        additions,
+                    },
+                ];
+            }
+        });
     };
 
     const addCurrentOrderToOrderList = () => {
+        if (currentOrder.length === 0) {
+            alert("Вы не выбрали напитков!");
+            return;
+        }
         setOrderList((prevList) => [...prevList, currentOrder]);
         setCurrentOrder([]);
         setIsSelecting(false);
@@ -73,7 +136,7 @@ function App() {
     };
 
     const calculateOrderTotal = (order) =>
-        order.reduce((total, item) => total + item.totalPrice, 0);
+        order.reduce((total, item) => total + item.count * item.price, 0);
 
     const calculateTotalCost = () =>
         orderList.reduce((total, order) => total + calculateOrderTotal(order), 0);
@@ -92,11 +155,11 @@ function App() {
                 ) : (
                     <>
                         <h3>Выберите напитки:</h3>
-                        {initialCoffeeDrinks.map((drink) => (
+                        {coffeeDrinks.map((drink) => (
                             <button
                                 key={drink.id}
                                 className="drink-button"
-                                onClick={() => showModal(drink)}
+                                onClick={() => openModal(drink)}
                             >
                                 <div className="drink-content">
                                     <span className="icon">{drink.icon}</span>
@@ -117,7 +180,7 @@ function App() {
                             <select>
                                 {order.map((item, idx) => (
                                     <option key={idx}>
-                                        {item.name} {item.label} x{item.count} +{item.addOnsPrice}$
+                                        {item.name} {item.label} x{item.count}
                                     </option>
                                 ))}
                             </select>
@@ -132,7 +195,8 @@ function App() {
                     ))}
                 </div>
                 <div className="summary">
-                    Общая стоимость всех заказов: <strong>${calculateTotalCost()}</strong>
+                    Общая стоимость всех заказов:{" "}
+                    <strong>${calculateTotalCost()}</strong>
                 </div>
                 <button className="clear-history-button" onClick={clearOrderHistory}>
                     Очистить историю заказов
@@ -144,29 +208,33 @@ function App() {
                         {currentOrder.map((item, index) => (
                             <div key={index} className="current-order-item">
                                 <span>{item.icon}</span>
-                                <span>{item.name} {item.label}</span>
+                                <span>
+                                    {item.name} {item.label}
+                                </span>
                                 <span>x{item.count}</span>
-                                <span>${item.totalPrice}</span>
+                                <span>${item.count * item.price}</span>
                             </div>
                         ))}
                         <div className="current-order-total">
                             Итог: ${calculateOrderTotal(currentOrder)}
                         </div>
-                        <button className="add-order-button" onClick={addCurrentOrderToOrderList}>
+                        <button
+                            className="add-order-button"
+                            onClick={addCurrentOrderToOrderList}
+                        >
                             Добавить заказ
                         </button>
                     </div>
                 )}
             </div>
 
-            {modalVisible && (
-                <Modal
-                    drink={selectedDrink}
-                    addDrinkToCurrentOrder={addDrinkToCurrentOrder}
-                    closeModal={closeModal}
-                    addOns={initialAddOns}
-                />
-            )}
+            <Modal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                onConfirm={handleConfirmOrder}
+                drink={selectedDrink}
+                additions={additions}
+            />
         </div>
     );
 }
