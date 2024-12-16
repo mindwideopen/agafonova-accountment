@@ -79,7 +79,7 @@ export const Modal = ({ isOpen, onClose, onConfirm, drink, additions }) => {
                             }`}
                             onClick={() => toggleAddition(addition)}
                         >
-                            {addition.name} (+${addition.price})
+                            {addition.name} (+₽ {addition.price})
                         </button>
                     ))}
                 </div>

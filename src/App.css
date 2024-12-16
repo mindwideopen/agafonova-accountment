@@ -118,3 +118,11 @@ width: 100%;
   color: white;
   border: none;
 }
+.drinks-wrapper {
+  display: flex
+;
+  flex-wrap: wrap;
+  max-width: 500px;
+  justify-content: space-around;
+
+}

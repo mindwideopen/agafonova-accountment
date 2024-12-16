@@ -10,6 +10,10 @@ button {
   margin: 10px;
   width: 150px;
   height: 75px;
+  cursor: pointer;
+}
+button.drink-button {
+  border-radius: 10px;
 }
 
 

@@ -251,8 +251,8 @@ const initialCoffeeDrinks = [
         name: "Espresso",
         icon: "☕",
         prices: {
-            floors: { M: 1, L: 2 },
-            all: { M: 3, L: 4 },
+            floors: { M: 70, L: 80 },
+            all: { M: 90, L: 100 },
         },
     },
     {
@@ -260,8 +260,8 @@ const initialCoffeeDrinks = [
         name: "Latte",
         icon: "🥛",
         prices: {
-            floors: { M: 5, L: 6 },
-            all: { M: 7, L: 8 },
+            floors: { M: 100, L: 120 },
+            all: { M: 120, L: 140 },
         },
     },
     {
@@ -269,8 +269,8 @@ const initialCoffeeDrinks = [
         name: "Cappuccino",
         icon: "🍶",
         prices: {
-            floors: { M: 10, L: 15 },
-            all: { M: 20, L: 25 },
+            floors: { M: 100, L: 120 },
+            all: { M: 120, L: 140 },
         },
     },
     {
@@ -278,25 +278,52 @@ const initialCoffeeDrinks = [
         name: "Americano",
         icon: "🫖",
         prices: {
-            floors: { M: 10, L: 15 },
-            all: { M: 20, L: 25 },
+            floors: { M: 70, L: 80 },
+            all: { M: 90, L: 100 },
         },
     },
     {
         id: 5,
-        name: "Mocha",
+        name: "Раф",
         icon: "🍫",
         prices: {
-            floors: { M: 10, L: 15 },
-            all: { M: 20, L: 25 },
+            floors: { M: 120, L: 140 },
+            all: { M: 140, L: 160 },
+        },
+    },
+    {
+        id: 6,
+        name: "Бамбл Кофе",
+        icon: "🍫",
+        prices: {
+            floors: { M: 140, L: 140 },
+            all: { M: 160, L: 160 },
+        },
+    },
+    {
+        id: 7,
+        name: "Альт. капучино",
+        icon: "🍫",
+        prices: {
+            floors: { M: 110, L: 140 },
+            all: { M: 130, L: 160 },
+        },
+    },
+    {
+        id: 8,
+        name: "Альт. латте",
+        icon: "🍫",
+        prices: {
+            floors: { M: 110, L: 140 },
+            all: { M: 130, L: 160 },
         },
     },
 ];
 
 const initialAdditions = [
-    { id: 1, name: "Корица", price: 1 },
-    { id: 2, name: "Сироп", price: 1 },
-    { id: 3, name: "Спешелти кофе", price: 1 },
+    { id: 1, name: "Корица", price: 0 },
+    { id: 2, name: "Сироп", price: 10 },
+    { id: 3, name: "Спешелти кофе", price: 20 },
 ];
 
 function App() {
@@ -307,6 +334,7 @@ function App() {
     const [isSelecting, setIsSelecting] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedDrink, setSelectedDrink] = useState(null);
+    const [dispalyOrderList, setDispalyOrderList] = useState(false);
 
     useEffect(() => {
         try {
@@ -423,7 +451,7 @@ function App() {
                                     </div>
                                 ))}
                                 <div className="current-order-total">
-                                    Итог: ${calculateOrderTotal(currentOrder)}
+                                    Итог: ₽{calculateOrderTotal(currentOrder)}
                                 </div>
                                 <button
                                     className="add-order-button"
@@ -434,18 +462,20 @@ function App() {
                             </div>
                         )}
                         <h3>Выберите напитки:</h3>
-                        {coffeeDrinks.map((drink) => (
-                            <button
-                                key={drink.id}
-                                className="drink-button"
-                                onClick={() => openModal(drink)}
-                            >
-                                <div className="drink-content">
-                                    <span className="icon">{drink.icon}</span>
-                                    <span className="name">{drink.name}</span>
-                                </div>
-                            </button>
-                        ))}
+                        <div className='drinks-wrapper'>
+                            {coffeeDrinks.map((drink) => (
+                                <button
+                                    key={drink.id}
+                                    className="drink-button"
+                                    onClick={() => openModal(drink)}
+                                >
+                                    <div className="drink-content">
+                                        <span className="icon">{drink.icon}</span>
+                                        <span className="name">{drink.name}</span>
+                                    </div>
+                                </button>
+                            ))}
+                        </div>
                     </>
                 )}
             </div>
@@ -453,7 +483,8 @@ function App() {
             <div className="right-panel">
                 <h1 className="title">Список заказов</h1>
                 <div className="order-list">
-                    {orderList.map((order, index) => (
+                    <button onClick={() => setDispalyOrderList(!dispalyOrderList)}>{!dispalyOrderList?'Отобразить список заказов': 'Скрыть список заказов'}</button>
+                     {dispalyOrderList && orderList.map((order, index) => (
                         <div key={index} className="order-item">
                             <span>{index + 1}</span>
                             <select>
@@ -474,7 +505,7 @@ function App() {
                     ))}
                 </div>
                 <div className="summary">
-                    Общая стоимость всех заказов: <strong>${calculateTotalCost()}</strong>
+                    Общая стоимость всех заказов: <strong>₽{calculateTotalCost()}</strong>
                 </div>
                 <button className="clear-history-button" onClick={clearOrderHistory}>
                     Очистить историю заказов
